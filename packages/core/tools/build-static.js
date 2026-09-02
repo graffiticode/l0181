@@ -4,7 +4,7 @@
 //     (the legacy lexicon.js request path is aliased to it by the API server.)
 //   - instructions.md: parent (L0000) instructions concatenated with L0181's.
 // The rest (spec.html, language-info.json, scope.json, schema.json, template.gc,
-// usage-guide.md) are L0181's own.
+// usage-guide.md, examples.md) are L0181's own.
 import { createRequire } from "module";
 import {
   mkdirSync,
@@ -51,7 +51,10 @@ const ownInstructions = readFileSync(join(specDir, "instructions.md"), "utf-8");
 writeFileSync(join(outDir, "instructions.md"), `${parentInstructions}\n\n${ownInstructions}`);
 
 // 4. Copy L0181's own verbatim spec assets.
-for (const f of ["usage-guide.md", "scope.json", "schema.json", "template.gc"]) {
+// examples.md is served, not just kept in the repo: the console's corpus generator reads it
+// through this asset when it has no sibling checkout of the language (see the console's
+// scripts/lang-examples.ts), which is the only path that works in CI and Cloud Run.
+for (const f of ["usage-guide.md", "scope.json", "schema.json", "template.gc", "examples.md"]) {
   const src = join(specDir, f);
   if (existsSync(src)) copyFileSync(src, join(outDir, f));
 }
