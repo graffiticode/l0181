@@ -89,13 +89,17 @@ point of the category: the deck is only as good as the links in it, and a link t
 not supply is a link that 404s. Prompt 60 is the other half of the lesson — asked for pictures
 with no URLs to hand, the right answer is text, not a guess.
 
+The hosts vary on purpose, and prompt 58 mixes two in one deck. There is no list of acceptable
+image domains: a URL the author wrote is used as the author wrote it, and a host you do not
+recognise is not a host that is down.
+
 57. Flashcards titled "Flags" with the country name on the back and the flag on the front, from https://flagcdn.com/w320/jp.png for Japan, https://flagcdn.com/w320/br.png for Brazil, https://flagcdn.com/w320/eg.png for Egypt and https://flagcdn.com/w320/ca.png for Canada.
-58. Make a deck of animal photos with the animal's name on the back: https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/330px-Cat_November_2010-1a.jpg is a cat, https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/330px-African_Bush_Elephant.jpg is an elephant.
-59. A deck of musical instrument photos with the instrument's name on the back — https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Violin_VL100.png/330px-Violin_VL100.png and https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Trumpet_1.jpg/330px-Trumpet_1.jpg.
+58. Make a deck of animal photos with the animal's name on the back: https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&w=320 is a cat, https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/330px-African_Bush_Elephant.jpg is an elephant.
+59. A deck of musical instrument photos with the instrument's name on the back — https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Violin_VL100.png/330px-Violin_VL100.png and https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Trumpet_1.jpg/330px-Trumpet_1.jpg.
 60. A deck where the front is a picture of a leaf and the back names the tree. I haven't collected the photos yet, so put the leaf description on the front for now and I'll swap the images in later.
-61. Create flashcards for art history with the painting on the front and the artist on the back: https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/330px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg, and https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/330px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg.
-62. Flashcards with a diagram of a cell organelle on the front and its name on the back, starting with https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Animal_mitochondrion_diagram_en.svg/330px-Animal_mitochondrion_diagram_en.svg.png for the mitochondrion.
-63. A deck of road sign images with what each sign means on the reverse — https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Stop_sign.jpg/330px-Stop_sign.jpg means come to a full stop.
+61. Create flashcards for art history with the painting on the front and the artist on the back: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/330px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg, and https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/330px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg.
+62. Flashcards with a diagram of a cell organelle on the front and its name on the back, starting with https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Animal_mitochondrion_diagram_en.svg/330px-Animal_mitochondrion_diagram_en.svg.png for the mitochondrion.
+63. A deck of road sign images with what each sign means on the reverse — https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Stop_sign.jpg/330px-Stop_sign.jpg means come to a full stop.
 64. Make flashcards where the front is the country name and the back is its flag image, using https://flagcdn.com/w320/de.png for Germany and https://flagcdn.com/w320/fr.png for France.
 
 ## Category 7: Light and Dark (65–70)

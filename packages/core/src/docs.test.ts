@@ -103,7 +103,9 @@ describe("image URLs in the docs resolve to images", () => {
     return found.map((u) => u.replace(/[.,;:]+$/, ""));
   }
 
-  const IMAGE = /\.(png|jpe?g|gif|svg|webp)$/i;
+  // Match on the path, not the whole URL: an image link may carry a query string
+  // (`?auto=compress&w=320`), and testing the raw tail would silently skip it.
+  const IMAGE = (u: string) => /\.(png|jpe?g|gif|svg|webp)$/i.test(u.split("?")[0]);
   // Reserved and stand-in hosts. example.com is IANA-reserved precisely so it never resolves.
   const PLACEHOLDER =
     /^https?:\/\/([^/]*\.)?(example\.(com|org|net)|placeholder\S*|localhost|127\.0\.0\.1|your-\S*|my-\S*)(\/|:|$)/i;
@@ -119,7 +121,7 @@ describe("image URLs in the docs resolve to images", () => {
   live(
     "every image URL in the docs returns an image",
     async () => {
-      const all = [...new Set(FILES.flatMap(urls).filter((u) => IMAGE.test(u)))];
+      const all = [...new Set(FILES.flatMap(urls).filter(IMAGE))];
       expect(all.length).toBeGreaterThan(0);
       const bad: string[] = [];
       for (const url of all) {

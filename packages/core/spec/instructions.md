@@ -39,22 +39,37 @@ cards [["hola" "hello"] ["adiós" "goodbye"]] title "Spanish Vocab" {}..
 - Wrap math in `$…$` — `["$x^2$" "x squared"]`. Text outside the delimiters stays prose, so
   do not wrap ordinary words in `\text{}`.
 - A side that is a URL renders as an image. There is no separate word for images.
-- **Never invent an image URL.** Use only URLs the author supplied, copied character for
-  character. A URL assembled from memory or from a plausible-looking pattern does not resolve,
-  and the learner gets a broken image where the prompt should be — the card is unusable and
-  nothing in the compiler catches it.
-- **Test every image URL before you emit it.** Fetch it and require a `2xx` status and an
-  `image/*` content type — `curl -sIL -o /dev/null -w '%{http_code} %{content_type}' <url>`.
-  Drop any URL that fails and fall back to text, as below. This applies to URLs the author
-  pasted too: authors paste stale links.
+- **A URL the author gave you goes into the card exactly as they wrote it.** Character for
+  character, whatever the domain. It is the author's link and they can see whether it works;
+  you cannot. Do not rewrite it, do not swap its host for one you recognise, and do not
+  replace the card with a note saying the link looked wrong. A caller who pastes a URL has
+  already decided.
+- **Never judge a URL by its domain.** An unfamiliar host is not a broken host, and there is
+  no list of blessed image domains. `thumb.wikimedia.org`, `upload.wikimedia.org`, a company's
+  own CDN, an S3 bucket and a personal server are all equally valid. Rejecting a link because
+  the domain is not the one you expected is the single worst thing you can do here: it throws
+  away a working image on a hunch and hands the learner a sentence about domains where the
+  picture should be.
+- **Never invent an image URL.** This is the opposite failure and just as bad. A URL assembled
+  from memory or from a plausible-looking pattern does not resolve, the learner gets a broken
+  image, and nothing in the compiler catches it. Only one source may be constructed rather
+  than copied, because its paths are a published code and not a content hash: country flags
+  are `https://flagcdn.com/w320/<ISO 3166-1 alpha-2>.png` — `jp`, `br`, `eg`, `ca`. Wikimedia
+  is not a second exception. Its thumbnail paths embed a hash of the file (`/thumb/1/1b/…`)
+  that cannot be derived from anything, and while
+  `https://commons.wikimedia.org/wiki/Special:FilePath/<file name>?width=330` needs no hash,
+  it still needs the exact Commons file name — which is the part you would be guessing.
+  Knowing the URL's shape is not knowing that the image exists.
+- **If you can fetch, verify; if you cannot fetch, pass it through.** Where you have a way to
+  make a request, check the URL returns a `2xx` and an `image/*` content type —
+  `curl -sIL -o /dev/null -w '%{http_code} %{content_type}' <url>` — and tell the author about
+  any that fail. Where you have no such way, emit the author's URL unchanged. Verification
+  means a request that came back; it never means an opinion about how the link looks. An
+  unverified URL is emitted, not dropped.
 - If the author asks for pictures but gives no URLs, **do not go looking for some.** Write the
   side as text naming what the picture would show and say the deck needs URLs. A text card is
-  usable; a broken image is not.
-- Only one source is safe to construct rather than copy, because its paths are built from a
-  published code and not a content hash: country flags are
-  `https://flagcdn.com/w320/<ISO 3166-1 alpha-2>.png` — `jp`, `br`, `eg`, `ca`. Wikimedia
-  thumbnail paths embed a hash of the file (`/thumb/4/4d/…`); that hash cannot be derived from
-  the file name, so a Wikimedia URL is only ever usable if the author pasted it.
+  usable; a broken image is not. This is the ONLY case where an image card becomes a text
+  card — never when a URL was supplied.
 - `theme` takes a bare tag, `theme DARK`, never the string `theme "dark"`.
 - Do not shuffle or order the deck in the program — the player shuffles, and the learner's
   ratings decide what comes back.

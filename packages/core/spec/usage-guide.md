@@ -40,8 +40,9 @@ Say this to get that:
   `["$x^2$" "x squared"]`. Text outside the delimiters stays prose.
 - **Images** — put the URL in place of the text. "The front is the flag at X, the back is
   'Japan'" → `["https://…" "Japan"]`. There is no separate word for images. Give the URLs
-  yourself: an invented one renders as a broken card, and no error says so. Ask for pictures
-  without URLs and you get the description as text instead.
+  yourself: an invented one renders as a broken card, and no error says so. A URL you supply
+  is used exactly as you wrote it, whatever the host — it is your link, and it is not second-
+  guessed. Ask for pictures without URLs and you get the description as text instead.
 - **The trailing record** — every program ends `{}..`. Don't drop it.
 
 ## Example Prompts

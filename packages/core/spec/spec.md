@@ -113,11 +113,15 @@ cards [
 ```
 
 The URLs above are real and resolve. That is deliberate: nothing in the compiler checks a URL,
-so a placeholder host copied out of a spec compiles cleanly and renders as a broken image. Use
-only URLs the author gave you, and fetch each one to confirm it returns an image before
-emitting it. Flags are the one source whose URLs may be constructed instead of copied —
-`https://flagcdn.com/w320/<ISO 3166-1 alpha-2>.png` — because the path is a published country
-code rather than a content hash.
+so a placeholder host copied out of a spec compiles cleanly and renders as a broken image.
+
+The rule in both directions is that the author owns the link. A URL the author supplies is
+emitted exactly as written, whatever its host — there is no list of acceptable image domains,
+and an unfamiliar one is not a broken one. A URL the author did not supply is not invented;
+flags are the single exception, `https://flagcdn.com/w320/<ISO 3166-1 alpha-2>.png`, because
+the path is a published country code rather than a content hash. Confirming a URL means
+fetching it and getting an image back; where no request can be made, the URL is emitted
+unchecked rather than dropped.
 
 ## Program Examples
 
