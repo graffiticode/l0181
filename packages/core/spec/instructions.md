@@ -39,6 +39,22 @@ cards [["hola" "hello"] ["adiós" "goodbye"]] title "Spanish Vocab" {}..
 - Wrap math in `$…$` — `["$x^2$" "x squared"]`. Text outside the delimiters stays prose, so
   do not wrap ordinary words in `\text{}`.
 - A side that is a URL renders as an image. There is no separate word for images.
+- **Never invent an image URL.** Use only URLs the author supplied, copied character for
+  character. A URL assembled from memory or from a plausible-looking pattern does not resolve,
+  and the learner gets a broken image where the prompt should be — the card is unusable and
+  nothing in the compiler catches it.
+- **Test every image URL before you emit it.** Fetch it and require a `2xx` status and an
+  `image/*` content type — `curl -sIL -o /dev/null -w '%{http_code} %{content_type}' <url>`.
+  Drop any URL that fails and fall back to text, as below. This applies to URLs the author
+  pasted too: authors paste stale links.
+- If the author asks for pictures but gives no URLs, **do not go looking for some.** Write the
+  side as text naming what the picture would show and say the deck needs URLs. A text card is
+  usable; a broken image is not.
+- Only one source is safe to construct rather than copy, because its paths are built from a
+  published code and not a content hash: country flags are
+  `https://flagcdn.com/w320/<ISO 3166-1 alpha-2>.png` — `jp`, `br`, `eg`, `ca`. Wikimedia
+  thumbnail paths embed a hash of the file (`/thumb/4/4d/…`); that hash cannot be derived from
+  the file name, so a Wikimedia URL is only ever usable if the author pasted it.
 - `theme` takes a bare tag, `theme DARK`, never the string `theme "dark"`.
 - Do not shuffle or order the deck in the program — the player shuffles, and the learner's
   ratings decide what comes back.

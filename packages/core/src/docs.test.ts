@@ -84,6 +84,58 @@ describe("compiled output matches the published schema", () => {
   });
 });
 
+describe("image URLs in the docs resolve to images", () => {
+  // A card side that is a URL renders as an image, and nothing in the compiler checks it: a
+  // placeholder host compiles cleanly and renders as a broken card. These files are what the
+  // generator is written from and retrieved against, so a URL that does not resolve here
+  // becomes a URL that does not resolve in a learner's deck.
+  const FILES = [
+    "spec/spec.md",
+    "spec/instructions.md",
+    "spec/usage-guide.md",
+    "spec/examples.md",
+    "spec/template.gc",
+  ];
+
+  /** Every http(s) URL in a file, with trailing sentence punctuation and markdown trimmed. */
+  function urls(path: string): string[] {
+    const found = readFileSync(path, "utf-8").match(/https?:\/\/[^\s"'`)\]]+/g) ?? [];
+    return found.map((u) => u.replace(/[.,;:]+$/, ""));
+  }
+
+  const IMAGE = /\.(png|jpe?g|gif|svg|webp)$/i;
+  // Reserved and stand-in hosts. example.com is IANA-reserved precisely so it never resolves.
+  const PLACEHOLDER =
+    /^https?:\/\/([^/]*\.)?(example\.(com|org|net)|placeholder\S*|localhost|127\.0\.0\.1|your-\S*|my-\S*)(\/|:|$)/i;
+
+  for (const file of FILES) {
+    test(`${file} names no placeholder image host`, () => {
+      expect(urls(file).filter((u) => PLACEHOLDER.test(u))).toEqual([]);
+    });
+  }
+
+  // Reachability is a network check, so it is opt-in: CHECK_URLS=1 npm run -w packages/core test
+  const live = process.env.CHECK_URLS === "1" ? test : test.skip;
+  live(
+    "every image URL in the docs returns an image",
+    async () => {
+      const all = [...new Set(FILES.flatMap(urls).filter((u) => IMAGE.test(u)))];
+      expect(all.length).toBeGreaterThan(0);
+      const bad: string[] = [];
+      for (const url of all) {
+        const res = await fetch(url, {
+          redirect: "follow",
+          headers: { "user-agent": "l0181-docs/1.0 (+https://github.com/graffiticode/l0181)" },
+        }).catch((e) => ({ ok: false, status: 0, headers: new Headers(), error: e }) as any);
+        const type = res.headers?.get?.("content-type") ?? "";
+        if (!res.ok || !type.startsWith("image/")) bad.push(`${url} -> ${res.status} ${type}`);
+      }
+      expect(bad).toEqual([]);
+    },
+    60_000,
+  );
+});
+
 describe("examples.md numbering is coherent", () => {
   // The corpus generator numbers what it creates by the LABEL written here, so a repeated or
   // skipped number silently mislabels a run and there is no way to tell afterwards which

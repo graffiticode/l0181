@@ -107,10 +107,17 @@ A side that is a URL renders as an image. Use it on either half of a pair, or bo
 
 ```
 cards [
-  ["https://example.com/flags/jp.png" "Japan"]
-  ["https://example.com/flags/br.png" "Brazil"]
+  ["https://flagcdn.com/w320/jp.png" "Japan"]
+  ["https://flagcdn.com/w320/br.png" "Brazil"]
 ] title "Flags" {}..
 ```
+
+The URLs above are real and resolve. That is deliberate: nothing in the compiler checks a URL,
+so a placeholder host copied out of a spec compiles cleanly and renders as a broken image. Use
+only URLs the author gave you, and fetch each one to confirm it returns an image before
+emitting it. Flags are the one source whose URLs may be constructed instead of copied —
+`https://flagcdn.com/w320/<ISO 3166-1 alpha-2>.png` — because the path is a published country
+code rather than a content hash.
 
 ## Program Examples
 

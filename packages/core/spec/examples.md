@@ -4,6 +4,7 @@
 90 example prompts for training a RAG model on L0181, the flashcard language — covering
 vocabulary decks, definitions, formula drills, dates and people, titles and instructions,
 image cards, light and dark decks, asymmetric card content, and longer drill decks.
+Image prompts carry real URLs, because a deck built on an invented one renders broken.
 
 Each numbered line is a prompt in the author's own voice. Prompts describe WHAT to build,
 never how to write it: an author asks for a deck of cards, not for a `cards [...]` program.
@@ -83,14 +84,19 @@ absent, so nothing in this file trains the model to reach for a mode L0181 does 
 
 ## Category 6: Image Cards (57–64)
 
-57. Flashcards titled "Flags" using a flag image on the front and the country name on the back, for Japan, Brazil, Egypt and Canada.
-58. Make a deck of animal photos with the animal's name on the back.
-59. A deck where the front is a picture of a leaf and the back names the tree.
-60. Create flashcards for art history: a painting on the front, the artist on the back.
-61. Flashcards with a diagram of a cell organelle on the front and its name on the back.
-62. A deck of road sign images with what each sign means on the reverse.
-63. Make flashcards where the front is the country name and the back is its flag image.
-64. A deck of musical instrument photos with the instrument's name on the back.
+An image card is a card whose side is a URL, so these prompts carry the URLs. That is the
+point of the category: the deck is only as good as the links in it, and a link the author did
+not supply is a link that 404s. Prompt 60 is the other half of the lesson — asked for pictures
+with no URLs to hand, the right answer is text, not a guess.
+
+57. Flashcards titled "Flags" with the country name on the back and the flag on the front, from https://flagcdn.com/w320/jp.png for Japan, https://flagcdn.com/w320/br.png for Brazil, https://flagcdn.com/w320/eg.png for Egypt and https://flagcdn.com/w320/ca.png for Canada.
+58. Make a deck of animal photos with the animal's name on the back: https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/330px-Cat_November_2010-1a.jpg is a cat, https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/330px-African_Bush_Elephant.jpg is an elephant.
+59. A deck of musical instrument photos with the instrument's name on the back — https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Violin_VL100.png/330px-Violin_VL100.png and https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Trumpet_1.jpg/330px-Trumpet_1.jpg.
+60. A deck where the front is a picture of a leaf and the back names the tree. I haven't collected the photos yet, so put the leaf description on the front for now and I'll swap the images in later.
+61. Create flashcards for art history with the painting on the front and the artist on the back: https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/330px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg, and https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/330px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg.
+62. Flashcards with a diagram of a cell organelle on the front and its name on the back, starting with https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Animal_mitochondrion_diagram_en.svg/330px-Animal_mitochondrion_diagram_en.svg.png for the mitochondrion.
+63. A deck of road sign images with what each sign means on the reverse — https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Stop_sign.jpg/330px-Stop_sign.jpg means come to a full stop.
+64. Make flashcards where the front is the country name and the back is its flag image, using https://flagcdn.com/w320/de.png for Germany and https://flagcdn.com/w320/fr.png for France.
 
 ## Category 7: Light and Dark (65–70)
 

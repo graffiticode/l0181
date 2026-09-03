@@ -39,7 +39,9 @@ Say this to get that:
 - **Math** — wrap it in `$…$`. "The front is $x^2$, the back is 'x squared'" →
   `["$x^2$" "x squared"]`. Text outside the delimiters stays prose.
 - **Images** — put the URL in place of the text. "The front is the flag at X, the back is
-  'Japan'" → `["https://…" "Japan"]`. There is no separate word for images.
+  'Japan'" → `["https://…" "Japan"]`. There is no separate word for images. Give the URLs
+  yourself: an invented one renders as a broken card, and no error says so. Ask for pictures
+  without URLs and you get the description as text instead.
 - **The trailing record** — every program ends `{}..`. Don't drop it.
 
 ## Example Prompts
@@ -53,8 +55,9 @@ Say this to get that:
   `flashcards_deck`
 - *"A dark-themed deck of state capitals: California/Sacramento, Texas/Austin,
   Florida/Tallahassee, New York/Albany, Illinois/Springfield."* → `flashcards_deck`
-- *"Flashcards titled 'Flags' using a flag image on the front and the country name on the
-  back, for Japan, Brazil, Egypt and Canada."* → `flashcards_deck`
+- *"Flashcards titled 'Flags' with the country name on the back and the flag on the front,
+  from https://flagcdn.com/w320/jp.png for Japan and https://flagcdn.com/w320/br.png for
+  Brazil."* → `flashcards_deck`
 - *"Times tables flashcards for the sevens, 7×1 through 7×12, with the product on the
   back."* → `flashcards_deck`
 
