@@ -54,7 +54,14 @@ export function segments(text: string): { math: boolean; text: string }[] {
 /** One side of a card: an image, or prose with its math spans typeset. */
 export function CardText({ text, alt = "" }: { text: string; alt?: string }) {
   if (isImageUrl(text)) {
-    return <img src={text.trim()} alt={alt} className="max-h-full max-w-full object-contain" />;
+    // `block` because preflight is off, so an image is otherwise inline and sits on the text
+    // baseline with a descender's worth of gap under it. `object-contain` letterboxes rather
+    // than crops, and the two maxima are what keep the image inside the card — they only bite
+    // because the wrapper in Deck has a definite height and width. Nothing here scales a small
+    // image UP: an icon stays an icon rather than being stretched to fill the card.
+    return (
+      <img src={text.trim()} alt={alt} className="block max-h-full max-w-full object-contain" />
+    );
   }
   return (
     <>

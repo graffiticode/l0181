@@ -86,10 +86,19 @@ a `response` action because that is one of the two action types the View recompi
 
 ### Tailwind
 
-Preflight is off, because this is a published component. `src/index.css` restores the two
-preflight rules that are load-bearing, scoped to `.l0181-deck`: `box-sizing: border-box` and
-`border-style: solid; border-width: 0`. Without the first, every `w-full p-6 border` element
-overflows its parent by exactly its padding and border.
+Preflight is off, because this is a published component. `src/index.css` restores the three
+preflight rules that are load-bearing, scoped to `.l0181-deck`: `box-sizing: border-box`,
+`border-style: solid; border-width: 0`, and `max-width: 100%; height: auto` on replaced
+elements. Without the first, every `w-full p-6 border` element overflows its parent by exactly
+its padding and border. Without the last, an author's image renders at its intrinsic size.
+
+A card side that is a URL renders as an image, and keeping it inside the card takes both ends
+of the chain. The image carries `max-h-full max-w-full object-contain`, but a percentage
+max-height resolves to `none` against a parent of indefinite height — so the wrapper in `Deck`
+must carry `h-full w-full` to inherit the card's definite `h-64`, plus `min-w-0` because a flex
+item's automatic minimum size is its content's, which for a replaced element is the image's
+intrinsic width. Drop the wrapper classes and a tall image runs straight through the card's
+bottom border while `max-height: 100%` sits there computing to nothing.
 
 Dark mode is `class`-based: the theme comes from the program and the learner's toggle, not from
 the OS setting of whoever opens the iframe. `Form` puts `dark` on `.l0181-deck`.

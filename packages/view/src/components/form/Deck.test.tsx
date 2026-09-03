@@ -176,3 +176,40 @@ describe("stacks", () => {
     expect(screen.getByText(/\d+ \/ \d+/).textContent).toMatch(/^[12] \/ 2$/);
   });
 });
+
+describe("an image card fits the card", () => {
+  // `max-h-full` on the image is a percentage against its parent. A percentage max-height
+  // resolves to `none` when the parent's height is indefinite, so the constraint that keeps a
+  // tall image inside the card only exists if this wrapper is sized against the card's own
+  // definite `h-64`. It is the wrapper, not the image, that regresses.
+  const IMAGE: Card[] = [{ id: 0, front: "https://example.com/jp.png", back: "Japan" }];
+
+  function wrapper(): HTMLElement {
+    const card = screen.getByRole("button", { name: /Reveal the answer|Show the front/ });
+    return card.firstElementChild as HTMLElement;
+  }
+
+  test("the content wrapper fills the card in both directions", () => {
+    render(<Deck cards={IMAGE} study={{}} onStudy={vi.fn()} />);
+    const cls = wrapper().className.split(/\s+/);
+    expect(cls).toContain("h-full");
+    expect(cls).toContain("w-full");
+  });
+
+  test("the wrapper may shrink below its content's intrinsic width", () => {
+    // A flex item's automatic minimum size is its content's; for an image that is the image's
+    // intrinsic width, so a wide one pushes the wrapper past the card without this.
+    render(<Deck cards={IMAGE} study={{}} onStudy={vi.fn()} />);
+    expect(wrapper().className.split(/\s+/)).toContain("min-w-0");
+  });
+
+  test("the image is inside that wrapper, bounded on both axes", () => {
+    render(<Deck cards={IMAGE} study={{}} onStudy={vi.fn()} />);
+    const img = screen.getByAltText("https://example.com/jp.png");
+    expect(wrapper().contains(img)).toBe(true);
+    const cls = img.className.split(/\s+/);
+    expect(cls).toContain("max-h-full");
+    expect(cls).toContain("max-w-full");
+    expect(cls).toContain("object-contain");
+  });
+});

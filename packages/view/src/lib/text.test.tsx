@@ -71,6 +71,21 @@ describe("CardText", () => {
     const img = screen.getByAltText("Japan") as HTMLImageElement;
     expect(img.src).toBe("https://example.com/jp.png");
   });
+
+  test("an image is bounded by the card in both directions", () => {
+    // The author's image is whatever size the author's image is. Without both maxima a tall
+    // one runs through the card's bottom border and a wide one through its sides; without
+    // object-contain, fitting one axis distorts the other. `block` is here because preflight
+    // is off, so an image is inline by default and leaves a baseline gap beneath it.
+    render(<CardText text="https://example.com/jp.png" alt="Japan" />);
+    const img = screen.getByAltText("Japan");
+    expect(img.className.split(/\s+/).sort()).toEqual([
+      "block",
+      "max-h-full",
+      "max-w-full",
+      "object-contain",
+    ]);
+  });
 });
 
 describe("textSize", () => {

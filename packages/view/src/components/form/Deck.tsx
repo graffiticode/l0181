@@ -134,8 +134,18 @@ export function Deck({
           }}
           className={CARD}
         >
+          {/*
+            `h-full w-full` is what makes an image fit. The card's height is definite (`h-64`),
+            but this wrapper is a centred flex item, so without it the wrapper's height is its
+            content's — indefinite — and the `max-h-full` on the image resolves to `none`
+            against it. A tall image then runs straight through the card's border. `min-w-0`
+            is the same story sideways: a flex item's automatic minimum size is its content's,
+            which for a replaced element is the image's intrinsic width.
+          */}
           <div
-            className={`${textSize(revealed ? card.back : card.front)} ${
+            className={`flex h-full w-full min-w-0 items-center justify-center ${textSize(
+              revealed ? card.back : card.front,
+            )} ${
               revealed
                 ? "text-zinc-600 dark:text-zinc-300"
                 : "font-semibold text-zinc-900 dark:text-zinc-100"
